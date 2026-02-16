@@ -28,9 +28,8 @@ class Navigation extends Component
             ['label' => 'Portfolio', 'icon' => 'folder', 'route' => 'user.file-manager'],
         ];
 
-        // Bottom navigation links (profile and logout)
+        // Bottom navigation links (only logout now)
         $this->bottomNavLink = [
-            ['label' => Auth::user()->firstname . ' ' . Auth::user()->lastname, 'route' => 'profile.edit', 'icon' => 'user', 'is_profile' => true],
             ['label' => 'Logout', 'route' => 'logout', 'icon' => 'right-from-bracket'],
         ];
 

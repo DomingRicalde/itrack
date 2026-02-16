@@ -20,9 +20,20 @@
                     </div>
                 </div>
 
-                {{-- Right side: Notification icon only --}}
-                <div class="flex items-center" wire:ignore>
+                {{-- Right side: Notification icon and Profile --}}
+                <div class="flex items-center gap-2" wire:ignore>
                     @livewire('user.dashboard.notification')
+                    
+                    {{-- Profile Section with subtle background --}}
+                    <a href="{{ route('profile.edit') }}" 
+                    class="flex items-center gap-2 bg-black/5 hover:bg-black/10 backdrop-blur-sm px-2 py-1.5 rounded-lg transition-all duration-200 group">
+                        <div class="w-9 h-9 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center flex-shrink-0 shadow-lg">
+                            <i class="fas fa-user text-white text-sm"></i>
+                        </div>
+                        <div class="hidden sm:block pr-1">
+                            <p class="text-sm font-medium text-white">{{ auth()->user()->firstname }} {{ auth()->user()->lastname }}</p>
+                        </div>
+                    </a>
                 </div>
             </div>
 
@@ -55,9 +66,20 @@
                     </div>
                 </div>
                 
-                {{-- Notification icon even when no active semester --}}
-                <div class="flex items-center">
+                {{-- Notification icon and Profile even when no active semester --}}
+                <div class="flex items-center gap-3">
                     @livewire('user.dashboard.notification')
+                    
+                    {{-- Profile Section --}}
+                    <a href="{{ route('profile.edit') }}" class="flex items-center gap-2 group">
+                        <div class="w-10 h-10 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center flex-shrink-0 ring-2 ring-white/20 group-hover:ring-white/40 transition-all duration-200">
+                            <i class="fas fa-user text-white text-sm"></i>
+                        </div>
+                        <div class="hidden sm:block">
+                            <p class="text-sm font-medium text-white">{{ auth()->user()->firstname }} {{ auth()->user()->lastname }}</p>
+                            <p class="text-xs text-gray-300">View Profile</p>
+                        </div>
+                    </a>
                 </div>
             </div>
         @endif
@@ -74,9 +96,20 @@
                 </div>
             </div>
             
-            {{-- Notification icon --}}
-            <div class="flex items-center">
+            {{-- Notification icon and Profile --}}
+            <div class="flex items-center gap-3">
                 @livewire('user.dashboard.notification')
+                
+                {{-- Profile Section --}}
+                <a href="{{ route('profile.edit') }}" class="flex items-center gap-2 group">
+                    <div class="w-10 h-10 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center flex-shrink-0 ring-2 ring-white/20 group-hover:ring-white/40 transition-all duration-200">
+                        <i class="fas fa-user text-white text-sm"></i>
+                    </div>
+                    <div class="hidden sm:block">
+                        <p class="text-sm font-medium text-white">{{ auth()->user()->firstname }} {{ auth()->user()->lastname }}</p>
+                        <p class="text-xs text-gray-300">View Profile</p>
+                    </div>
+                </a>
             </div>
         </div>
     @endif

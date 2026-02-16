@@ -46,14 +46,13 @@
             table-layout: fixed;
         }
 
-        .logo-left, .logo-right {
+        .logo-left {
             display: table-cell;
-            vertical-align: middle;
-            width: 25%;
+            vertical-align: right;
+            width: 25%; 
+            text-align: right;
+            font-family: 'Arial', sans-serif;
         }
-
-        .logo-left { text-align: right; }
-        .logo-right { text-align: left; padding-left: 13px; }
 
         .header-center {
             display: table-cell;
@@ -61,10 +60,20 @@
             width: 50%;
             text-align: center;
             padding: 0 1px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .logo-right {
+            display: table-cell;
+            vertical-align: left;
+            width: 25%; 
+            text-align: left;
+            padding-left: 13px; 
+            font-family: 'Arial', sans-serif;
         }
 
         .logo {
-            max-height: 80px; /* Reduced logo size */
+            max-height: 100px; /* Reduced logo size */
             padding-top: 5px;
         }
 
@@ -73,15 +82,61 @@
             padding: 0;
             line-height: 0.9;
             text-align: center;
+            font-family: 'Arial', sans-serif;
         }
 
-        .republic { font-size: 11px; font-weight: normal; margin: 0; padding: 0; }
-        .university-name { font-size: 15px; font-weight: bold; margin: 4px 0 0 0; text-transform: uppercase; }
-        .campus-name { font-size: 11px; font-weight: bold; margin: 5px 0 0 0; }
-        .address { font-size: 11px; margin: 4px 0 0 0; }
-        .contact-info { font-size: 11px; margin: 3px 0 0 0; }
-        .website { font-size: 11px; margin: 3px 0 0 0; font-style: italic; }
-        .college-name { font-size: 14px; font-weight: bold; margin: 8px 0 0 0; text-transform: uppercase; }
+        .republic {
+            font-size: 12px;
+            font-weight: normal;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .university-name {
+            font-size: 17px; 
+            font-weight: bold;
+            margin: 4px 0 0 0; 
+            text-transform: uppercase;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .campus-name {
+            font-size: 12px; 
+            font-weight: bold;
+            margin: 5px 0 0 0; 
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .address {
+            font-size: 12px; 
+            margin: 4px 0 0 0; 
+            font-family: 'Arial', sans-serif;
+        }
+
+        .contact-info {
+            font-size: 12px; 
+            margin: 3px 0 0 0; 
+            font-family: 'Arial', sans-serif;
+        }
+
+        .website {
+            font-size: 12px; /* Increased from 9px */
+            margin: 3px 0 0 0; /* Increased from 2px */
+            font-style: italic;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .college-name {
+            font-size: 16px; /* Same as university-name */
+            font-weight: bold;
+            margin: 10px 0 0 0; /* Increased from 8px */
+            text-transform: uppercase;
+            white-space: nowrap;
+            font-family: 'Arial', sans-serif;
+        }
 
         .college-divider {
             width: 100%;
@@ -405,7 +460,7 @@
 
                 <br>
                 
-                <div class="college-name">GRADUATE SCHOOL AND OPEN LEARNING COLLEGE</div>
+                <div class="college-name">COLLEGE OF ADVANCED AND PROFESSIONAL STUDIES</div>
             </div>
             <div class="logo-right">
                 <img src="{{ public_path('images/1.png') }}" alt="BP Logo" class="logo">

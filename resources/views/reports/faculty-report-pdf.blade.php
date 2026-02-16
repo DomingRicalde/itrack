@@ -595,7 +595,7 @@
 
                 <br>
                 
-                <div class="college-name">GRADUATE SCHOOL AND OPEN LEARNING COLLEGE</div>
+                <div class="college-name">COLLEGE OF ADVANCED AND PROFESSIONAL STUDIES</div>
             </div>
             <div class="logo-right">
                 <img src="{{ public_path('images/1.png') }}" alt="BP Logo" class="logo">

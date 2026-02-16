@@ -13,6 +13,7 @@ class RequirementTypeSeeder extends Seeder
         RequirementType::query()->delete();
 
         // Create all items as folders first
+        $facultyLoading = RequirementType::create(['name' => 'Faculty Loading', 'is_folder' => true]);  
         $syllabi = RequirementType::create(['name' => 'Syllabus/Syllabi', 'is_folder' => true]);
         $syllabusAcceptance = RequirementType::create(['name' => 'Syllabus Acceptance Form', 'is_folder' => true]);
         
@@ -32,6 +33,6 @@ class RequirementTypeSeeder extends Seeder
         $gradingSheet = RequirementType::create(['name' => 'Grading Sheet', 'is_folder' => true]);
         $record = RequirementType::create(['name' => 'Record', 'is_folder' => true]);
         $studentOutput = RequirementType::create(['name' => 'Student Output', 'is_folder' => true]);
-        $classRecord = RequirementType::create(['name' => 'Class Record', 'is_folder' => true]);
+        $classRecord = RequirementType::create(['name' => 'Class Record', 'is_folder' => true]); 
     }
 }

@@ -61,30 +61,33 @@
         .logo-left {
             display: table-cell;
             vertical-align: middle;
-            width: 15%; 
+            width: 33%; /* Reduced from 15% */
             text-align: right;
+            padding-right: 2px; /* Minimal padding */
             font-family: 'Arial', sans-serif;
         }
 
         .header-center {
             display: table-cell;
             vertical-align: middle;
-            width: 70%; 
+            width: 34%; /* Increased from 50% */
             text-align: center; 
-            padding: 0 10px; 
+            padding: 0 2px; /* Reduced padding */
             font-family: 'Arial', sans-serif;
         }
 
         .logo-right {
             display: table-cell;
             vertical-align: middle;
-            width: 15%; 
+            width: 33%; /* Reduced from 15% */
             text-align: left;
+            padding-left: 2px; /* Minimal padding */
             font-family: 'Arial', sans-serif;
         }
 
         .logo {
-            max-height: 70px; 
+            max-height: 60px; /* Slightly reduced */
+            width: auto;
         }
 
         .university-info {
@@ -486,7 +489,7 @@
                 @if(file_exists(public_path('images/sample.png')))
                     <img src="{{ public_path('images/sample.png') }}" alt="CVSU Logo" class="logo">
                 @else
-                    <div style="height: 70px; display: flex; align-items: center; justify-content: center;">
+                    <div style="height: 60px; display: flex; align-items: center; justify-content: flex-end;">
                         <span style="font-size: 8px;">[CVSU LOGO]</span>
                     </div>
                 @endif
@@ -501,13 +504,13 @@
                     <div class="website">www.cvsu.edu.ph</div>
                 </div>
 
-                <div class="college-name">GRADUATE SCHOOL AND OPEN LEARNING COLLEGE</div>
+                <div class="college-name">COLLEGE OF ADVANCED AND PROFESSIONAL STUDIES</div>
             </div>
             <div class="logo-right">
                 @if(file_exists(public_path('images/1.png')))
                     <img src="{{ public_path('images/1.png') }}" alt="BP Logo" class="logo">
                 @else
-                    <div style="height: 70px; display: flex; align-items: center; justify-content: center;">
+                    <div style="height: 60px; display: flex; align-items: center; justify-content: flex-start;">
                         <span style="font-size: 8px;">[BP LOGO]</span>
                     </div>
                 @endif
