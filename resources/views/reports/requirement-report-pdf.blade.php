@@ -719,7 +719,7 @@
         <div class="approval-item">
             <div class="approval-label">Prepared by:</div>
             <div class="approval-spacing"></div>
-            <div class="approval-name">{{ Auth::user()->firstname }} {{ $formattedPreparedByMiddleName }} {{ Auth::user()->lastname }} {{ Auth::user()->extensionname }}</div>
+            <div class="approval-name">{{ strtoupper(Auth::user()->firstname) }} {{ strtoupper($formattedPreparedByMiddleName) }} {{ strtoupper(Auth::user()->lastname) }} {{ strtoupper(Auth::user()->extensionname) }}</div>
             <div class="approval-position">{{ Auth::user()->position ?? 'Administrator' }}</div>
         </div>
         
@@ -727,10 +727,10 @@
             <div class="approval-label">Approved by:</div>
             <div class="approval-spacing"></div>
             <div class="approval-name">
-                {{ $deanSignatory->name ?? 'Dr. Bettina Joyce P. Ilagan' }}
+                {{ strtoupper($deanSignatory->name ?? 'Dr. Bettina Joyce P. Ilagan') }}
             </div>
             <div class="approval-position">
-                {{ $deanSignatory->position ?? 'Dean, Graduate School and Open Learning College' }}
+                {{ $deanSignatory->position ?? 'Dean' }}
             </div>
         </div>
     </div>

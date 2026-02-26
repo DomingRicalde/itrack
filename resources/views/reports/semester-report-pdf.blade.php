@@ -672,21 +672,42 @@
 
     <!-- Approval Sections aligned to the right -->
     <div class="approval-sections-right">
+        @php
+            // Get prepared by signatory (user who generated the report)
+            $preparedByUser = Auth::user();
+            $preparedByMiddleName = $preparedByUser->middlename ? substr(trim($preparedByUser->middlename), 0, 1) . '.' : '';
+            
+            // Debug: Check what's in approvedBySignatory
+            $debugInfo = '';
+            if (isset($approvedBySignatory)) {
+                if (is_object($approvedBySignatory)) {
+                    $debugInfo = 'Object: ' . get_class($approvedBySignatory) . ' - ID: ' . ($approvedBySignatory->id ?? 'no id');
+                } else {
+                    $debugInfo = 'Type: ' . gettype($approvedBySignatory);
+                }
+            } else {
+                $debugInfo = 'approvedBySignatory is not set';
+            }
+        @endphp
+        
+        <!-- Debug info - remove this after fixing -->
+        <!-- <div style="font-size: 8px; color: red; text-align: left;">{{ $debugInfo }}</div> -->
+        
         <div class="approval-item">
             <div class="approval-label">Prepared by:</div>
             <div class="approval-spacing"></div>
-            <div class="approval-name">{{ Auth::user()->firstname }} {{ $preparedByMiddleName }} {{ Auth::user()->lastname }} {{ Auth::user()->extensionname }}</div>
-            <div class="approval-position">{{ Auth::user()->position ?? 'Administrator' }}</div>
+            <div class="approval-name">{{ strtoupper($preparedByUser->firstname . ' ' . $preparedByMiddleName . ' ' . $preparedByUser->lastname . ' ' . $preparedByUser->extensionname) }}</div>
+            <div class="approval-position">{{ strtoupper($preparedByUser->position ?? 'ADMINISTRATOR') }}</div>
         </div>
         
         <div class="approval-item">
             <div class="approval-label">Approved by:</div>
             <div class="approval-spacing"></div>
             <div class="approval-name">
-                {{ $deanSignatory->name ?? 'Dr. Bettina Joyce P. Ilagan' }}
+                {{ strtoupper($approvedBySignatory->name ?? 'DR. BETTINA JOYCE P. ILAGAN') }}
             </div>
             <div class="approval-position">
-                {{ $deanSignatory->position ?? 'Dean, Graduate School and Open Learning College' }}
+                {{ $approvedBySignatory->position ?? 'Dean' }}
             </div>
         </div>
     </div>

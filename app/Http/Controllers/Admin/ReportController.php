@@ -7,6 +7,7 @@ use App\Models\Semester;
 use App\Models\College;
 use App\Models\Program;
 use App\Models\Course;
+use App\Models\Signatory;
 use App\Models\Requirement;
 use App\Models\User;
 use App\Models\CourseAssignment;
@@ -41,6 +42,7 @@ class ReportController extends Controller
         $semesterId = $request->input('semester_id');
         $programId = $request->input('program_id');
         $search = $request->input('search');
+        $signatoryId = $request->input('signatory_id'); // Get from request if passed
         
         // Use selected semester or get active semester
         $semester = $semesterId 
@@ -58,10 +60,54 @@ class ReportController extends Controller
             abort(404, 'No data found for the selected filters');
         }
 
+        // Get signatory for approval (Dean) - IMPROVED QUERY
+        $approvedBySignatory = null;
+        
+        // First try to get by specific ID if provided
+        if ($signatoryId) {
+            $approvedBySignatory = Signatory::where('id', $signatoryId)
+                ->where('is_active', true)
+                ->first();
+        }
+        
+        // If not found by ID, try to find any active dean
+        if (!$approvedBySignatory) {
+            $approvedBySignatory = Signatory::where('is_active', true)
+                ->where(function($query) {
+                    $query->where('position', 'LIKE', '%dean%')
+                        ->orWhere('position', 'LIKE', '%Dean%')
+                        ->orWhere('position', 'LIKE', '%DEAN%')
+                        ->orWhere('position', 'LIKE', '%Dean%');
+                })
+                ->first();
+        }
+        
+        // If still not found, get ANY active signatory
+        if (!$approvedBySignatory) {
+            $approvedBySignatory = Signatory::where('is_active', true)->first();
+        }
+        
+        // If absolutely no signatory found, use fallback
+        if (!$approvedBySignatory) {
+            \Log::warning('No active signatory found in database for report generation');
+            $approvedBySignatory = (object) [
+                'name' => 'DR. BETTINA JOYCE P. ILAGAN',
+                'position' => 'Dean'
+            ];
+        } else {
+            // Log that we found a signatory for debugging
+            \Log::info('Using signatory for report:', [
+                'id' => $approvedBySignatory->id,
+                'name' => $approvedBySignatory->name,
+                'position' => $approvedBySignatory->position
+            ]);
+        }
+
         // Generate PDF report for preview
         $pdf = Pdf::loadView('reports.semester-report-pdf', [
             'overviewData' => $overviewData,
-            'search' => $search
+            'search' => $search,
+            'approvedBySignatory' => $approvedBySignatory
         ])->setPaper('a4', 'landscape');
 
         // Preview in browser instead of downloading

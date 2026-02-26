@@ -6,6 +6,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Semester;
 use App\Models\College;
+use App\Models\Signatory;
 use App\Models\Program;
 use App\Models\Course;
 use App\Models\Requirement;
@@ -86,6 +87,15 @@ class ReportIndex extends Component
             return;
         }
 
+        // Get signatory for approval (Dean) from signatories table
+        $approvedBySignatory = Signatory::where('is_active', true)
+            ->where(function($query) {
+                $query->where('position', 'LIKE', '%dean%')
+                    ->orWhere('position', 'LIKE', '%Dean%')
+                    ->orWhere('position', 'LIKE', '%DEAN%');
+            })
+            ->first();
+
         // Redirect to the preview route with filter parameters
         $params = [
             'semester_id' => $this->selectedSemester,
@@ -97,6 +107,11 @@ class ReportIndex extends Component
 
         if ($this->search) {
             $params['search'] = $this->search;
+        }
+        
+        // Add signatory ID to params if found
+        if ($approvedBySignatory) {
+            $params['signatory_id'] = $approvedBySignatory->id;
         }
 
         // Generate URL for the report preview
